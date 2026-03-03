@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto8 # Zostawiamy 8, skoro tak miałeś wcześniej
+      java: corretto8 
 
   pre_build:
     commands:
@@ -12,17 +12,14 @@ phases:
   build:
     commands:
       - echo "====== BEGINNING BUILD ======"
-      # USUNIĘTO: -s settings.xml (to klucz do sukcesu)
       - mvn clean install -DskipTests 
 
   post_build:
     commands:
       - echo "====== RUNNING TESTS ======"
-      # Jeśli masz ten skrypt w repo, to zadziała. Jeśli nie - zakomentuj te 2 linie poniżej
       - chmod +x run-tests.sh
       - ./run-tests.sh
       - echo "====== PACKAGING ARTIFACT ======"
-      # USUNIĘTO: -s settings.xml
       - mvn package -DskipTests
       
 artifacts:
